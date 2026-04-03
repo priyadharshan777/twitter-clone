@@ -23,11 +23,13 @@ const PORT=process.env.PORT
 
 const app = express()
 
+// ✅ Allow both dev and production
 app.use(cors({
-    origin : "http://localhost:3000",
-    credentials : true
+    origin: process.env.NODE_ENV === "production" 
+        ? "https://twitter-clone-2zm0.onrender.com"  // ← your Render URL
+        : "http://localhost:3000",
+    credentials: true
 }))
-
 app.use(express.json({
     limit : "5mb"
 })); //parses JSON bodies (for Postman/Frontend) 
