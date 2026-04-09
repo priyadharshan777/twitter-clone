@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import XSvg from "../../../components/svgs/X";
 
-import { MdPassword } from "react-icons/md";
+import { MdPassword, MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { baseUrl } from "../../../constant/url";
 import LoadingSpinner from "../../../components/common/LoadingSpinner";
@@ -15,6 +15,7 @@ const LoginPage = () => {
 		username: "",
 		password: "",
 	});
+	const [showPassword, setShowPassword] = useState(false);
 
 	const queryClient = useQueryClient()
 
@@ -84,13 +85,16 @@ const LoginPage = () => {
 					<label className='input input-bordered rounded flex items-center gap-2'>
 						<MdPassword />
 						<input
-							type='password'
+							type={showPassword ? "text" : "password"}
 							className='grow'
 							placeholder='Password'
 							name='password'
 							onChange={handleInputChange}
 							value={formData.password}
 						/>
+						<span className='cursor-pointer' onClick={() => setShowPassword(!showPassword)}>
+							{showPassword ? <MdOutlineVisibilityOff /> : <MdOutlineVisibility />}
+						</span>
 					</label>
 					<button className='btn rounded-full btn-primary text-white'>
 						{isPending?<LoadingSpinner/>:"Login"}
