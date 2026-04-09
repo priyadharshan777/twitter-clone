@@ -83,6 +83,16 @@ export const createComment = async(req,res)=>{
 
         post.comments.push(comment)
         await post.save()
+
+        if(post.user.toString() !== userId.toString()){
+            const notification = new Notification({
+                from: userId,
+                to: post.user,
+                type: "comment"
+            })
+            await notification.save()
+        }
+
         res.status(200).json(post.comments)
 
     } catch (error) {

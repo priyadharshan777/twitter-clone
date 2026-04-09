@@ -1,6 +1,6 @@
 import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
@@ -119,7 +119,7 @@ const Post = ({ post }) => {
 
 	
 	const postOwner = post.user;  
-	const isLiked = post.likes.includes(authUser._id);
+	const isLiked = post.likes.includes(authUser?._id);
 
 	const isMyPost = authUser?._id===post.user._id
 
@@ -256,7 +256,7 @@ const Post = ({ post }) => {
 								{!isLiked && !isLiking &&(
 									<FaRegHeart className='w-4 h-4 cursor-pointer text-slate-500 group-hover:text-pink-500' />
 								)}
-								{isLiked && !isLiking &&(<FaRegHeart className='w-4 h-4 cursor-pointer text-pink-500 ' />)}
+								{isLiked && !isLiking &&(<FaHeart className='w-4 h-4 cursor-pointer text-pink-500 ' />)}
 
 								<span
 									className={`text-sm group-hover:text-pink-500 ${

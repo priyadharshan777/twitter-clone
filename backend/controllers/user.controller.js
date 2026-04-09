@@ -6,7 +6,7 @@ import cloudinary from "cloudinary"
 export const getProfile = async(req,res) =>{
     try {
         const {username}=req.params
-        const user =await User.findOne({username})
+        const user =await User.findOne({username}).select("-password")
 
         if(!user){
             return res.status(404).json({error: "User not found"})
@@ -24,7 +24,7 @@ export const followUnfollowUser = async(req,res)=>{
         const userToModify = await User.findById({_id:id})
         const currentUser = await User.findById({_id:req.user._id})
 
-        if(id===req.user._id){
+        if(id===req.user._id.toString()){
             return res.status(400).json({error:"You can't follow/unfollow yourself"})
         }
 

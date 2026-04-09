@@ -22,7 +22,7 @@ const Sidebar = () => {
 						"Content-Type":"application/json"
 					}
 				})
-				const authUser = res.json()
+				const authUser = await res.json()
 				if(!res.ok){
 					throw new Error(authUser.error || "Something went wrong")
 				}
