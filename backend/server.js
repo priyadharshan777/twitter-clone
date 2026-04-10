@@ -23,11 +23,17 @@ const PORT=process.env.PORT
 
 const app = express()
 
-// ✅ Allow both dev and production
+// Old CORS — broke local dev because .env has NODE_ENV=production,
+// so it only allowed the Render URL even on localhost
+// app.use(cors({
+//     origin: process.env.NODE_ENV === "production"
+//         ? "https://twitter-clone-2zm0.onrender.com"
+//         : "http://localhost:3000",
+//     credentials: true
+// }))
+
 app.use(cors({
-    origin: process.env.NODE_ENV === "production" 
-        ? "https://twitter-clone-2zm0.onrender.com"  // ← your Render URL
-        : "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://twitter-clone-2zm0.onrender.com"],
     credentials: true
 }))
 app.use(express.json({
